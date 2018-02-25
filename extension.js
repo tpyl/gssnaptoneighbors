@@ -180,8 +180,8 @@ function snapToNeighbors(display, screen, window, binding) {
         workArea.x + workArea.width, 
         windows);
 
-    // If there is a window below, do not run over the
-    // title bar. 
+    // For whatever reason, the top bar does not show up in the
+    // work area, so we adjust for that with this little hack.
     if (maxVerth.min <= 0) {
         maxVerth.min += TOP_BAR_HEIGHT;
     }
