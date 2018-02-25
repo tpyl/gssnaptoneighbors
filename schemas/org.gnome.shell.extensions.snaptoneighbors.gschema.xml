@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-shell-extensions">
+  <schema id="org.gnome.shell.extensions.snaptoneighbors"
+          path="/org/gnome/shell/extensions/snaptoneighbors/">
+    <key type="as" name="snap-to-neighbors">
+      <default><![CDATA[['<Alt><Control>s']]]></default>
+      <summary>Snap window size to neighbors</summary>
+    </key>
+  </schema>
+</schemalist>
+
