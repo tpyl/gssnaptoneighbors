@@ -25,3 +25,4 @@ There are some additional values you can tweak at the top of `extension.js`, but
 the default values should be good, unless you have highly customized visuals on
 your desktop.
 
+The default keyboard shortcut is *CTRL+ALT+S*
