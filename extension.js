@@ -38,7 +38,7 @@ const Convenience = Me.imports.convenience;
 
 const OVERLAP_TOLERANCE = 5;
 const SCAN_BOX_SIZE = 50;
-const TITLE_BAR_HEIGHT = 27;
+const TOP_BAR_HEIGHT = 27;
 
 /**
  * Return all windows on the currently active workspace
@@ -182,12 +182,12 @@ function snapToNeighbors(display, screen, window, binding) {
 
     // If there is a window below, do not run over the
     // title bar. 
-    if (maxVerth.max < workArea.y + workArea.height) {
-        maxVerth.max -= TITLE_BAR_HEIGHT;
+    if (maxVerth.min <= 0) {
+        maxVerth.min += TOP_BAR_HEIGHT;
     }
 
-    if (maxHorizh.max < workArea.y + workArea.height) {
-        maxHorizh.max -= TITLE_BAR_HEIGHT;
+    if (maxHorizh.min <= 0) {
+        maxHorizh.min += TOP_BAR_HEIGHT;
     }
 
     if ((maxHorizw.max - maxHorizw.min) * (maxHorizh.max - maxHorizh.min) > 
