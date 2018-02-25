@@ -222,6 +222,6 @@ function enable() {
 }
 
 function disable() {
-    Main.wm.removeKeybinding('fill-empty');
+    Main.wm.removeKeybinding('snap-to-neighbors');
 }
 
