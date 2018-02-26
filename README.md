@@ -5,6 +5,8 @@ way than most tiling schemes. Instead of making an entire workspace behave like
 a Ion-style tiling window manager you can, with a quick keyboard shortcut, snap
 a single window to fill the space between neighboring windows. 
 
+![demo image](demo.gif "How it works")
+
 ## Installation 
 
 Clone the repository and symlink or copy it to the extensions folder:
@@ -26,3 +28,5 @@ the default values should be good, unless you have highly customized visuals on
 your desktop.
 
 The default keyboard shortcut is *CTRL+ALT+S*
+
+
