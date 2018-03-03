@@ -51,7 +51,7 @@ function getWindowsOnActiveWorkspace() {
 
     for (let i = 0; i < windowActors.length; i++) {
         let win = windowActors[i].meta_window;
-        if(win.located_on_workspace(curWorkSpace)) {
+        if(win.located_on_workspace(curWorkSpace) && !win.minimized) {
             windows.push(win);
         }
     }
@@ -181,13 +181,18 @@ function snapToNeighbors(display, screen, window, binding) {
         windows);
 
     // For whatever reason, the top bar does not show up in the
-    // work area, so we adjust for that with this little hack.
-    if (maxVerth.min <= 0) {
-        maxVerth.min += TOP_BAR_HEIGHT;
-    }
+    // work area, so we adjust for that with this little hack. 
+    // I'm assuming top bar can't be on monitors other than 0 
+    // TODO: Figure out the right way to check if we should snap to the 
+    // top bar, instead of top of the window. 
+    if (window.get_monitor() == 0) {
+        if (maxVerth.min <= 0) {
+            maxVerth.min += TOP_BAR_HEIGHT;
+        }
 
-    if (maxHorizh.min <= 0) {
-        maxHorizh.min += TOP_BAR_HEIGHT;
+        if (maxHorizh.min <= 0) {
+            maxHorizh.min += TOP_BAR_HEIGHT;
+        }
     }
 
     if ((maxHorizw.max - maxHorizw.min) * (maxHorizh.max - maxHorizh.min) > 

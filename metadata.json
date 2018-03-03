@@ -3,5 +3,6 @@
     "description": "Provides ability to quickly resize and move window to fill all empty space on desktop.",
     "uuid": "gssnaptoneighbors@tpyl.github.io",
     "settings-schema": "org.gnome.shell.extensions.snaptoneighbors",
-    "shell-version": ["3.26.2"]
+    "url": "https://github.com/tpyl/gssnaptoneighbors",
+    "shell-version": ["3.18.5", "3.26.2"]
 }
