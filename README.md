@@ -13,8 +13,15 @@ Clone the repository and symlink or copy it to the extensions folder:
 
 ``` 
 git clone https://github.com/tpyl/gssnaptoneighbors.giti
-ln -s gssnaptoneighbors.git ~/.local/share/gnome-shell/extensions/gssnaptoneighbors@tpyl.github.io
+ln -s ~/gssnaptoneighbors.git ~/.local/share/gnome-shell/extensions/gssnaptoneighbors@tpyl.github.io
 ```
+You then have to enable the extension either through gnome-tweak-tool, or by installing
+the extension web plugin and going to https://extensions.gnome.org/local/. 
+
+Notice that the plugin was developed on Ubuntu 17.10, and in metadata.json is only flagged
+to work with gnome shell 3.26.2. It will likely work with many other versions as well, but
+you may have to add your version to the list. 
+
 
 ## Configuration
 
