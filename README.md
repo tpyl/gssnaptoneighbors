@@ -36,4 +36,18 @@ your desktop.
 
 The default keyboard shortcut is *CTRL+ALT+S*
 
+# How it works
 
+When you press the hotkey, the currently active window is resized to fit the
+available space. From the top left corner of the window, the maximum available
+horizontal space is first determined along a thin area. This allows the window
+to potentially reduce it's hight, but increase it's width to fill up empty
+space. Once the maximum horizontal area is determined, the maximal vertical
+expansion is determined so that the window will not overlap any other window.
+
+A similar process is tried again, but this time starting first with thin
+vertical scan followed by horizontal expansion. Out of these two possible
+results, the one that yields the larger surface area is selected. 
+
+In practice, just remeber that the expansion happens from the top left corner of
+the window and is not related in any way to to the current size of the window. 
