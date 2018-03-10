@@ -51,7 +51,9 @@ function getWindowsOnActiveWorkspace() {
 
     for (let i = 0; i < windowActors.length; i++) {
         let win = windowActors[i].meta_window;
-        if(win.located_on_workspace(curWorkSpace) && !win.minimized) {
+        if(win.located_on_workspace(curWorkSpace) &&
+            !win.minimized && 
+            win.get_frame_type() == 0) {
             windows.push(win);
         }
     }
