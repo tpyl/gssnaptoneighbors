@@ -12,7 +12,7 @@ a single window to fill the space between neighboring windows.
 Clone the repository and symlink or copy it to the extensions folder:
 
 ``` 
-git clone https://github.com/tpyl/gssnaptoneighbors.giti
+git clone https://github.com/tpyl/gssnaptoneighbors.git
 ln -s ~/gssnaptoneighbors.git ~/.local/share/gnome-shell/extensions/gssnaptoneighbors@tpyl.github.io
 ```
 You then have to enable the extension either through gnome-tweak-tool, or by installing
