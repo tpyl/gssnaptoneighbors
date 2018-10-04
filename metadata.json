@@ -4,5 +4,5 @@
     "uuid": "gssnaptoneighbors@tpyl.github.io",
     "settings-schema": "org.gnome.shell.extensions.snaptoneighbors",
     "url": "https://github.com/tpyl/gssnaptoneighbors",
-    "shell-version": ["3.18.5", "3.26.2"]
+    "shell-version": ["3.28.2"]
 }

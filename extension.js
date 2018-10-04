@@ -38,7 +38,6 @@ const Convenience = Me.imports.convenience;
 
 const OVERLAP_TOLERANCE = 5;
 const SCAN_BOX_SIZE = 50;
-const TOP_BAR_HEIGHT = 27;
 
 /**
  * Return all windows on the currently active workspace
@@ -70,8 +69,7 @@ function getWindowsOnActiveWorkspace() {
  * The upper and lower limits define the y coordinate
  * range to check for overlapping windows. 
  */
-function expandHorizontally(x, upper, lower, maxx, windows) {
-    let minx = 0;
+function expandHorizontally(x, upper, lower, minx, maxx, windows) {
 
     for (let i = 0; i < windows.length; i++) {
         let rect = windows[i].get_frame_rect();
@@ -105,8 +103,7 @@ function expandHorizontally(x, upper, lower, maxx, windows) {
  * The left and right limits define the x coordinate
  * range to check for overlapping windows. 
  */
-function expandVertically(y, left, right, maxy, windows) {
-    let miny = 0;
+function expandVertically(y, left, right, miny, maxy, windows) {
 
     for (let i = 0; i < windows.length; i++) {
         let rect = windows[i].get_frame_rect();
@@ -140,13 +137,13 @@ function expandVertically(y, left, right, maxy, windows) {
  * in closer to 1 aspect ratio is selected. 
  */
 function snapToNeighbors(display, screen, window, binding) {
-
     // Unmaximize first
     if (window.maximized_horizontally || window.maximizedVertically)
         window.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
 
     let workArea = window.get_work_area_current_monitor();
     let myrect = window.get_frame_rect();
+
     let windows = getWindowsOnActiveWorkspace();
 
     // Scan for overlapping windows in a thin bar around the top of the 
@@ -155,6 +152,7 @@ function snapToNeighbors(display, screen, window, binding) {
         myrect.x + Math.min(SCAN_BOX_SIZE, myrect.width / 2), 
         myrect.y + Math.min(SCAN_BOX_SIZE, myrect.height / 2), 
         myrect.y + Math.min(SCAN_BOX_SIZE, myrect.height / 2) + SCAN_BOX_SIZE,
+        workArea.x, 
         workArea.x + workArea.width,
         windows
     );
@@ -163,8 +161,7 @@ function snapToNeighbors(display, screen, window, binding) {
         myrect.y + Math.min(SCAN_BOX_SIZE, myrect.height / 2),
         maxHorizw.min + OVERLAP_TOLERANCE,
         maxHorizw.max - OVERLAP_TOLERANCE, 
-        // It seems maximizing past the end of the screen is not allowed anyway, 
-        // so to avoid 
+        workArea.y, 
         workArea.y + workArea.height,
         windows)
 
@@ -172,6 +169,7 @@ function snapToNeighbors(display, screen, window, binding) {
         myrect.y + Math.min(SCAN_BOX_SIZE, myrect.height / 2),
         myrect.x + Math.min(SCAN_BOX_SIZE, myrect.width / 2), 
         myrect.x + Math.min(SCAN_BOX_SIZE, myrect.width / 2) + SCAN_BOX_SIZE, 
+        workArea.y, 
         workArea.y + workArea.height,
         windows)
 
@@ -179,23 +177,9 @@ function snapToNeighbors(display, screen, window, binding) {
         myrect.x + Math.min(SCAN_BOX_SIZE, myrect.width / 2),
         maxVerth.min + OVERLAP_TOLERANCE, 
         maxVerth.max - OVERLAP_TOLERANCE, 
+        workArea.x,
         workArea.x + workArea.width, 
         windows);
-
-    // For whatever reason, the top bar does not show up in the
-    // work area, so we adjust for that with this little hack. 
-    // I'm assuming top bar can't be on monitors other than 0 
-    // TODO: Figure out the right way to check if we should snap to the 
-    // top bar, instead of top of the window. 
-    if (window.get_monitor() == 0) {
-        if (maxVerth.min <= 0) {
-            maxVerth.min += TOP_BAR_HEIGHT;
-        }
-
-        if (maxHorizh.min <= 0) {
-            maxHorizh.min += TOP_BAR_HEIGHT;
-        }
-    }
 
     if ((maxHorizw.max - maxHorizw.min) * (maxHorizh.max - maxHorizh.min) > 
         (maxVertw.max - maxVertw.min) * (maxVerth.max - maxVerth.min)) {
