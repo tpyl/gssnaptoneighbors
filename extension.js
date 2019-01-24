@@ -46,7 +46,7 @@ function getWindowsOnActiveWorkspace() {
     let windows = [];
     let windowActors = global.get_window_actors();
 
-    let curWorkSpace = global.screen.get_active_workspace();
+    let curWorkSpace = global.workspaceManager.get_active_workspace();
 
     for (let i = 0; i < windowActors.length; i++) {
         let win = windowActors[i].meta_window;
@@ -136,7 +136,7 @@ function expandVertically(y, left, right, miny, maxy, windows) {
  * both vertically and horizontally. The expnasion that results
  * in closer to 1 aspect ratio is selected. 
  */
-function snapToNeighbors(display, screen, window, binding) {
+function snapToNeighbors(display, window, binding) {
     // Unmaximize first
     if (window.maximized_horizontally || window.maximizedVertically)
         window.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
